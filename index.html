@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="imgs/favicon-16x16.png">
+  <title>Calculator</title>
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="calc-body">
+      <div class="calc-screen">
+        <textarea rows="1" cols="8" class="calc-operation textboxx" id="mainip" oninput="calculate()"> </textarea>
+        <div id="mainop" class="calc-typed">
+        </div>
+      </div>
+      <div class="calc-button-row">
+        <div class="button c" id="clear">C</div>
+        <div class="button l" onclick="cal('(')" id="">(</div>
+        <div class="button l" onclick="cal(')')">)</div>
+        <div class="button l" onclick="scientific('nfacto')">n!</div>
+        <div class="button l" onclick="clearone()"><-  </div>
+        </div>
+
+        <div class="calc-button-row">
+          <div class="button l" id="" onclick="cal('2.7182*')">e</div>
+          <div class="button l" onclick="cal('2.7182**')" id="">exp</div>
+          <div class="button l" onclick="scientific('log')">Log</div>
+          <div class="button l" onclick="scientific('ln')">Ln</div>
+          <div class="button l" onclick="cal('π')">π</div>
+        </div>
+        <div class="calc-button-row">
+          <div class="button l" id="" onclick="sqre()">x <sup>2</sup></div>
+          <div class="button l" onclick="xy()" id="">x <sup>y</sup></div>
+          <div class="button l" onclick="cal('%')">Mod</div>
+          <div class="button l" onclick="sci()">Sci</div>
+          <div class="button l" onclick="cal('/')">/</div>
+
+        </div>
+
+        <div class="calc-button-row dnone" id="science1">
+          <div class="button l" onclick="scientific('sin')">Sin</div>
+          <div class="button l" onclick="scientific('cos')">Cos</div>
+          <div class="button l" onclick="scientific('tan')">Tan</div>
+          <div class="button l" onclick="memoryfun('ms')">MS</div>
+          <div class="button l" onclick="memoryfun('mr')">MR</div>
+
+        </div>
+        <div class="calc-button-row dnone" id="science">
+          <div class="button l" onclick="scientific('cosec')">Cosec</div>
+          <div class="button l" onclick="scientific('sec')">Sec</div>
+          <div class="button l" onclick="scientific('cot')">Cot</div>
+          <div class="button l" onclick="memoryfun('m+')">M+</div>
+          <div class="button l" onclick="memoryfun('m-')">M-</div>
+
+        </div>
+        <div class="calc-button-row">
+          <div class="button l" id="" onclick="scientific('pos')">|x|</div>
+          <div class="button" onclick="cal(7)" id="num7">7</div>
+          <div class="button" onclick="cal(8)" id="num8">8</div>
+          <div class="button" onclick="cal(9)" id="num9">9</div>
+          <div class="button l" onclick="cal('*')">x</div>
+        </div>
+        <div class="calc-button-row">
+          <div class="button l" id="" onclick="scientific('1/x')">1/ <sub>x</sub></div>
+          <div class="button" id="num4" onclick="cal(4)">4</div>
+          <div class="button" id="num5" onclick="cal(5)">5</div>
+          <div class="button" id="num6" onclick="cal(6)">6</div>
+          <div class="button l" onclick="cal('-')">−</div>
+        </div>
+        <div class="calc-button-row">
+          <div class="button l" id="" onclick="scientific('root2')">2√x</div>
+          <div class="button" id="num1" onclick="cal(1)">1</div>
+          <div class="button" id="num2" onclick="cal(2)">2</div>
+          <div class="button" id="num3" onclick="cal(3)">3</div>
+          <div class="button l" onclick="cal('+')">+</div>
+        </div>
+        <div class="calc-button-row">
+          <div class="button l" onclick="scientific('10res')">10 <sup>x</sup></div>
+          <div class="button" onclick="scientific('+-')"><sup>+</sup>/-</div>
+          <div class="button" onclick="cal('0')">0</div>
+          <div class="button" onclick="cal('.')">.</div>
+          <div class="button l" onclick="eql()">=</div>
+        </div>
+      </div>
+    </div>
+    <script src="js/script.js"></script>
+    <script src="js/logaridham.js"></script>
+    <script src="js/memory.js"></script>
+</body>
+
+</html>
