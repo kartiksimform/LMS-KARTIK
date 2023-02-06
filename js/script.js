@@ -21,8 +21,7 @@ image.addEventListener("change", (event) => {
 
   reader.readAsDataURL(imagee);
 
-  console.log(reader);
-  console.log("ggj");
+  
 });
 
 function submitone(ev) {
@@ -36,7 +35,6 @@ function submitone(ev) {
   } else {
     warning.innerHTML = "";
 
-    // console.log(reader);
     let imgsrc;
     if(ev=='oldtonew'){
         imgsrc=image.src;
@@ -54,57 +52,31 @@ function submitone(ev) {
       description: description.value,
     };
 
-    // localStorage.setItem('thumbnail', reader.result);
-    // console.log;
-    // count
-   
+ 
   
-    // while( localStorage[localStorage.length+1]=='undefined'){
-    
-    // }
-
-    // console.log(localStorage.length);
     let len=localStorage.length;
     while( typeof( localStorage[len+1])!='undefined'){
             
         console.log("S");
         len++;
     }
-    // console.log(len);
         
     localStorage.setItem(len + 1, JSON.stringify(ob));
   }
 }
-//     submitbnt.addEventListener('click',function(){
 
-// });
 
-if (typeof( localStorage.getItem[6])=='undefined'){
-}
-else{
-    console.log("p");
-    
-}
-// console.log("S");
+
 let newob;
 
 function setvalue() {
-  // for (x in localStorage){
-  //     newob = JSON.parse(localStorage[x]);
-
-  //     // console.log(newob["productId"]);
-  // }
-
-  //   for (let i = 1; i <= localStorage.length; i++) {
-  // console.log(i);
+ 
   for (i in localStorage) {
     try {
       newob = JSON.parse(localStorage[i]);
-      //   console.log(newob["productId"]);
-      //   console.log();
+
       if (newob["productId"].NaN) {
       } else {
-        // console.log(newob["productId"]);
 
         let tr = document.createElement("tr");
         tr.classList.add("table-row");
@@ -133,7 +105,6 @@ function setvalue() {
 
         td0.innerHTML = newob["productId"];
         td1.innerHTML = newob["productName"];
-        //   td2.innerHTML = newob["image"];
         let src = newob["image"];
         td2.innerHTML = "<img  width='100' src=' ".concat(src).concat("'>");
 
@@ -144,21 +115,19 @@ function setvalue() {
         edit.classList.add("fa-solid");
         edit.setAttribute("id", "edit");
         edit.classList.add("fa-pen-to-square");
+        edit.classList.add("editbtn");
         edit.setAttribute("onclick", 'editval("'.concat(i).concat('")'));
-
+        
         let remove = document.createElement("i");
         remove.classList.add("fa-solid");
         remove.setAttribute("id", "remove");
         remove.classList.add("fa-trash");
+        remove.classList.add("removebtn");
         remove.setAttribute("onclick", "removeval(".concat(i).concat(")"));
 
         actiondiv.appendChild(edit);
         actiondiv.appendChild(remove);
-        //     console.log(newob['productId']);
-        //     console.log(newob['productName']);
-        //     console.log(newob['image']);
-        //     console.log(newob['price']);
-        //     console.log(newob['description']);
+  
       }
     } catch (e) {
       // console.log(e);
@@ -168,12 +137,10 @@ function setvalue() {
 
 function removeval(id) {
   localStorage.removeItem(id);
-  // setvalue();
   location.reload();
 }
 
 function editval(id) {
-  // submitbnt
   submitbnt.classList.toggle("dnone");
   update.classList.toggle("dnone");
   addnew.classList.toggle("dnone");
@@ -183,15 +150,13 @@ function editval(id) {
 
   productId.value = newob["productId"];
   productName.value = newob["productName"];
-  //   image.value=newob['image'];
   image.setAttribute("src", newob["image"]);
   image.setAttribute("type", "image");
-  image.setAttribute("width", "50px");
+  image.setAttribute("width", "200px");
   price.value = newob["price"];
   description.innerHTML = newob["description"];
 
-  // productId
-
+ 
   console.log(id);
 }
 
