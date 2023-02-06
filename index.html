@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crud Opration</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
+  <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>  
+  <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>            
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />  
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div class="main">
+
+    <header>
+      <h1>Local Storage Crud Oprations</h1>
+      <nav class="header-nav">
+        <!-- <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a> -->
+      </nav>
+    </header>
+
+    <section class="hero">
+      <!-- <h1>Welcome to Our Website</h1>
+                <p>Discover the world of possibilities with us</p>
+                <a href="#" class="btn">Learn More</a> -->
+
+      <div class="form">
+        <form>
+
+          <input type="text" id="storeid" class="dnone">
+          <div id="warning">
+
+            <img src="" id="shows" alt="">
+          </div>
+          <div class="form-group">
+            <label for="productId">Product Id</label>
+            <input type="text" id="productId" required>
+          </div>
+          <div class="form-group">
+            <label for="productName">Product Name</label>
+            <input type="text" id="productName" required>
+          </div>
+          <div class="form-group">
+            <label for="image">Image</label>
+            <input type="file" id="image" accept="image/*">
+          </div>
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" id="price" min="0" step="0.01" required>
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" rows="5" required></textarea>
+          </div>
+          <div class="flex">
+
+            <button type="" class="dnone" id="update">Update</button>
+            <button type="" class="dnone" onclick="submitone('oldtonew')" id="addnew">Add New</button>
+            <button type="" onclick="submitone('new')" id="submit">Submit</button>
+          </div>
+        </form>
+
+      </div>
+    </section>
+    <!-- <i class="fa-solid fa-trash one" onclick="fun('1')"></i> -->
+    <section class="showdetais">
+      <table class="table" id="maintable">
+        <thead class="table-head">
+          <tr>
+            <th class="table-head-item">Product Id</th>
+            <th class="table-head-item">Product Name</th>
+            <th class="table-head-item">Image</th>
+            <th class="table-head-item">Price</th>
+            <th class="table-head-item">Description</th>
+            <th class="table-head-item">Action</th>
+          </tr>
+          <!-- <tr>
+            <th class="table-head-item"> <input type="text" id="filterproductId" onchange="filterbyid()"></th>
+
+
+            <th class="table-head-item">Product Name</th>
+            <th class="table-head-item">Image</th>
+            <th class="table-head-item">Price</th>
+            <th class="table-head-item">Description</th>
+            <th class="table-head-item">Action</th>
+          </tr> -->
+        </thead>
+        <tbody class="table-body" id="tablebody">
+          <!-- <tr class="table-row">
+                        <td class="table-cell">PID001</td>
+                        <td class="table-cell">Product 1</td>
+                        <td class="table-cell"><img src="product1.jpg" alt="Product 1 Image" width="100"></td>
+                        <td class="table-cell">$100</td>
+                        <td class="table-cell">This is a description of product 1</td>
+                      </tr>
+                      <tr class="table-row">
+                        <td class="table-cell">PID002</td>
+                        <td class="table-cell">Product 2</td>
+                        <td class="table-cell"><img src="product2.jpg" alt="Product 2 Image" width="100"></td>
+                        <td class="table-cell">$200</td>
+                        <td class="table-cell">This is a description of product 2</td>
+                      </tr> -->
+        </tbody>
+      </table>
+
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+    <section class="footer">
+      <footer>
+        <p>Copyright &copy; 2023</p>
+      </footer>
+
+    </section>
+  </div>
+  <script src="https://kit.fontawesome.com/96e97f4edb.js" crossorigin="anonymous"></script>
+  <script src="js/script.js"></script>
+  <script src="js/filter.js"></script>
+</body>
+
+</html>
