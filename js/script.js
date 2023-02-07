@@ -1,6 +1,6 @@
-$(document).ready(function(){  
-    $('#maintable').DataTable();  
-}); 
+$(document).ready(function () {
+  $("#maintable").DataTable();
+});
 
 let submitbnt = document.getElementById("submit");
 let productId = document.getElementById("productId");
@@ -20,8 +20,6 @@ image.addEventListener("change", (event) => {
   const imagee = event.target.files[0];
 
   reader.readAsDataURL(imagee);
-
-  
 });
 
 function submitone(ev) {
@@ -36,12 +34,10 @@ function submitone(ev) {
     warning.innerHTML = "";
 
     let imgsrc;
-    if(ev=='oldtonew'){
-        imgsrc=image.src;
-    }
-    else{
-        
-        imgsrc=reader.result;
+    if (ev == "oldtonew") {
+      imgsrc = image.src;
+    } else {
+      imgsrc = reader.result;
     }
 
     let ob = {
@@ -52,32 +48,24 @@ function submitone(ev) {
       description: description.value,
     };
 
- 
-  
-    let len=localStorage.length;
-    while( typeof( localStorage[len+1])!='undefined'){
-            
-        console.log("S");
-        len++;
+    let len = localStorage.length;
+    while (typeof localStorage[len + 1] != "undefined") {
+      len++;
     }
-        
+
     localStorage.setItem(len + 1, JSON.stringify(ob));
   }
 }
 
-
-
 let newob;
 
 function setvalue() {
- 
   for (i in localStorage) {
     try {
       newob = JSON.parse(localStorage[i]);
 
       if (newob["productId"].NaN) {
       } else {
-
         let tr = document.createElement("tr");
         tr.classList.add("table-row");
         let actiondiv = document.createElement("div");
@@ -117,7 +105,7 @@ function setvalue() {
         edit.classList.add("fa-pen-to-square");
         edit.classList.add("editbtn");
         edit.setAttribute("onclick", 'editval("'.concat(i).concat('")'));
-        
+
         let remove = document.createElement("i");
         remove.classList.add("fa-solid");
         remove.setAttribute("id", "remove");
@@ -127,7 +115,6 @@ function setvalue() {
 
         actiondiv.appendChild(edit);
         actiondiv.appendChild(remove);
-  
       }
     } catch (e) {
       // console.log(e);
@@ -156,8 +143,6 @@ function editval(id) {
   price.value = newob["price"];
   description.innerHTML = newob["description"];
 
- 
-  console.log(id);
 }
 
 update.addEventListener("click", function () {
@@ -171,7 +156,6 @@ update.addEventListener("click", function () {
   } else {
     warning.innerHTML = "";
     let imagename = image.src;
-    console.log(imagename);
     let ob = {
       productId: productId.value,
       productName: productName.value,
@@ -186,6 +170,3 @@ update.addEventListener("click", function () {
 });
 
 setvalue();
-
-
-
