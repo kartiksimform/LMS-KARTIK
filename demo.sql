@@ -99,7 +99,7 @@ select student.name from class natural join student where class.class_name like 
 select distinct c1.t_id  from class AS c1,class as c2  where c1.t_id=c2.t_id and c1.s_id<>c2.s_id;
 
 
-
+-- alter table class modify column c_id  varchar(10) 
 
 
 
