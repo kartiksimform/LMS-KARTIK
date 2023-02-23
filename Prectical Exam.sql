@@ -117,6 +117,8 @@ end
 //
 delimiter ;
 
+insert into user (name,street_number,address_line1,address_line2,city,state,country,pincode)
+values('deep',6,'suthar faliya','luna','padra','gujrat','india',391440);
 
 insert into user (name,street_number,address_line1,address_line2,city,state,country,pincode)
 values('kartik',5,'suthar faliya','luna','padra','gujrat','india',391440),
@@ -183,6 +185,7 @@ call userorder(4,11,5);
 call userorder(5,12,2);
 call userorder(6,13,5);
 call userorder(7,14,4);
+call userorder(1,14,3);
 
 
 
@@ -203,7 +206,44 @@ select * from order_details;
 
 
 
-
-
 -- start queres
 
+
+-- 1. Fetch all the User order list and include atleast following details in that.
+-- - Customer name
+-- - Product names
+-- - Order Date
+-- - Expected delivery date (in days, i.e. within X days)
+
+select u.`name` , p.`product_name`, o.`order_date`,CONCAT( DATEDIFF(o.`delivery_date`, o.`order_date`) , ' Days'), o.`o_id` from  `user`  u   inner join `orders` o on u.u_id=o.u_id inner join order_details od on od.o_id=o.o_id inner join `product` p on p.p_id=od.p_id;
+
+
+-- 2. Create summary report which provide information about
+-- - All undelivered Orders
+
+select u.`name` ,p.`product_name` from `user` u natural join orders o  natural join order_details od inner join product p on od.p_id=p.p_id where o.order_status like 'un%';  
+
+
+-- 5 Most recent orders
+
+
+select u.`name` ,p.product_name, o.order_date  from `user` u natural join orders o natural join order_details od inner join product p on od.p_id=p.p_id limit 5;
+
+-- - Top 5 active users (Users having most number of orders)
+
+select u.`u_id`,u.`name`,concat('Order ' ,count(u.u_id),' Times') from `user` u natural join orders o natural join order_details od inner join product p on od.p_id=p.p_id group by u.u_id limit 5;
+
+
+-- - Inactive users (Users who hasn’t done any order)
+
+select  u.`u_id`,u.`name` from `user` u where u.u_id not in (select distinct u_id from orders)  ;
+
+-- Top 5 Most purchased products 
+
+select p.product_name,count(od.quntity) from product p inner join order_details od on od.p_id=p.p_id group by od.p_id order by  count(od.quntity) desc limit 5;
+  
+  
+  -- Most expensive orders.
+select p.product_name , sum(od.price) from product p inner join order_details od on od.p_id=p.p_id group by od.p_id order by sum(od.price) desc limit 1;
+-- ost chepest orders.
+select p.product_name , sum(od.price) from product p inner join order_details od on od.p_id=p.p_id group by od.p_id order by sum(od.price) asc limit 1;
