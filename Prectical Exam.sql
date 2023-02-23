@@ -1,13 +1,11 @@
 -- user - user id, user_name, email, phone_number, address, pincode
--- order - order id, user_id, order_status, expected delivery date
--- order details - order id, 
+
 
 create database online_delivery_system;
 
+use online_delivery_system;
 
-create database hemaxiordertab;
-
-create table user (
+create table `user` (
 `u_id` int not null auto_increment,
 `name` varchar(30) not null,
 `street_number` varchar(40) not null,
@@ -17,8 +15,10 @@ create table user (
 `state` varchar(40) not null,
 `country` varchar(40) not null,
 `pincode` int not null,
-primary key (u_id));
+primary key (u_id)
+);
 
+ 
 
 -- product - product id, product name, product price, description, quantity
 
@@ -26,10 +26,184 @@ create table product(
 `p_id`int not null auto_increment,
 `product_name` varchar(30) not null,
 `price` varchar(30) not null,
-`created_at` date default now() not null,
-`updated_at` varchar(30) not null,
+`created_at` timestamp default current_timestamp(),
+`updated_at` varchar(30),
+primary key (p_id)
+);
+alter table product add column `quntity` int not null;
+
+delimiter //
+
+create trigger `update_before_product` 
+before update on `product`
+for each row
+set new.updated_at=now();
+end if;
+// 
+delimiter ; 
 
 
+
+
+
+delimiter //
+
+create procedure addproduct (in product_name varchar(30),in price int ,in quntity int)
+ begin
+insert into product (`product_name`,`price`,`quntity`)value(product_name,price,quntity);
+-- select * from product;
+end
+//
+delimiter  ;
+
+
+
+  
+  -- order - order id, user_id, order_status, expected delivery date
+-- order details - order id,
+
+
+create table orders (
+o_id int auto_increment,
+u_id int not null,
+order_status varchar(20) not null ,
+order_date timestamp default current_timestamp(),
+delivery_date timestamp ,
+constraint checkstatus check(order_status='delivered' or order_status='undelivered'),
+primary key (o_id),
+foreign key (u_id) references `user`(u_id)
+);
+alter table orders modify order_status varchar(20) not null default 'undelivered';
+
+
+alter table orders add column delivery_date datetime generated always as (DATE_ADD(order_date, interval 7 DAY)) stored;
+
+select * from orders;
+
+create table order_details(
+od_id int auto_increment,
+o_id int not null,
+p_id int not null,
+quntity int not null,
+price int ,
+primary key (od_id),
+foreign key (o_id) references orders(o_id),
+foreign key (p_id) references product(p_id)
 );
 
+
+ delimiter //
+create procedure userorder (user_id int,product_id int,now_quntity int)
+begin
+declare old_quntity int;
+insert into orders (`u_id`) value(user_id);
+insert into order_details (`o_id`,`p_id`,`quntity`,`price`) value((select last_insert_id()),product_id,now_quntity,(select price from product where `p_id`=product_id)*now_quntity);
+
+ select `quntity` into old_quntity from `product` where `p_id`=product_id ;
+
+	update `product` set `quntity`=old_quntity-now_quntity where  `p_id`=product_id;
+end
+
+   //
+ delimiter ;
+
+
+
+delimiter //
+create procedure changestatus(order_id int)
+begin
+update  orders set  order_status='delivered' where o_id=order_id; 
+end 
+//
+delimiter ;
+
+
+insert into user (name,street_number,address_line1,address_line2,city,state,country,pincode)
+values('kartik',5,'suthar faliya','luna','padra','gujrat','india',391440),
+	  ('jayesh',8,'brahman faliya','vadodara','vadodara','gujrat','india',391450);
+      
+insert into user (name,street_number,address_line1,address_line2,city,state,country,pincode)
+values     ("hemaxi","96","satyagrah soc","near iscon","ahmedabad","gujarat","india",396005),
+      (
+	"binal" , 
+	"150",
+	"satyagrah soc",
+	"near iscon",
+	"ahmedabad",
+	"gujarat",
+	"india",
+	396005
+	),(
+"aayush" , 
+"01",
+"gulmohar park",
+"near naherunagar",
+"ahmedabad",
+"gujarat",
+"india",
+396008
+),(
+"denish" , 
+"08",
+"santtukaram soc",
+"palanpur jakatnaka",
+"surat",
+"gujarat",
+"india",
+396003
+),(
+"zaid" , 
+"101",
+"manmandir apartment",
+"katargam char rasta",
+"vadodara",
+"gujarat",
+"india",
+300450
+);
+      
+
+
+delete from product where p_id>0; 
+insert into product (product_name,price,quntity)
+value ('pen',20,50),
+('pencil',10,100),
+('book',100,50),
+('watch',350,70),
+('cup',170,400),('camera',50000,100);
+
+call addproduct('lock',60,500);
+
+-- userid,productid,quntity
+
+call userorder(1,8,5);
+call userorder(2,9,3);
+call userorder(3,10,8);
+call userorder(4,11,5);
+call userorder(5,12,2);
+call userorder(6,13,5);
+call userorder(7,14,4);
+
+
+
+call changestatus(18);
+call changestatus(21);
+call changestatus(22);
+
+
+
+
+
+
+select * from `user`;
+select * from product;
+select * from `orders`;
+select * from order_details;
+
+
+
+
+
+
+-- start queres
 
