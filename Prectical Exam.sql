@@ -91,7 +91,7 @@ foreign key (p_id) references product(p_id)
 
 
  delimiter //
-create procedure userorder (user_id int,product_id int,now_quntity int)
+create procedure userorder (in user_id int, in product_id int,in now_quntity int)
 begin
 declare old_quntity int;
 insert into orders (`u_id`) value(user_id);
@@ -104,7 +104,7 @@ delimiter ;
 
 
 delimiter //
-create procedure changestatus(order_id int)
+create procedure changestatus(in order_id int)
 begin
 update  orders set  order_status='delivered' where o_id=order_id; 
 end 
@@ -188,7 +188,7 @@ call userorder(6,9,3);
 call userorder(5,10,8);
 call userorder(3,12,2);
 call userorder(2,13,5);
-
+call userorder(3,10,2);
 
 call changestatus(18);
 call changestatus(21);
@@ -209,9 +209,9 @@ call changestatus(28);
 
 
 
-select * from `user`;
+select * from `user` limit 1,3;
 select * from product;
-select * from `orders`;
+select * from `orders` ;
 select * from order_details;
 
 
@@ -226,13 +226,15 @@ select * from order_details;
 -- - Order Date
 -- - Expected delivery date (in days, i.e. within X days)
 
-select u.`name` , p.`product_name`, o.`order_date`,CONCAT( DATEDIFF(o.`delivery_date`, o.`order_date`) , ' Days') as 'Day left', o.`o_id` from  `user`  u   inner join `orders` o on u.u_id=o.u_id inner join order_details od on od.o_id=o.o_id inner join `product` p on p.p_id=od.p_id;
+
+
+select u.`name` , p.`product_name`, o.`order_date`,CONCAT( DATEDIFF(o.`delivery_date`, NOW()) , ' Days') as 'Day left', o.`o_id` from  `user`  u   inner join `orders` o on u.u_id=o.u_id inner join order_details od on od.o_id=o.o_id inner join `product` p on p.p_id=od.p_id;
 
 
 -- 2. Create summary report which provide information about
 -- - All undelivered Orders
 
-select u.`name` ,p.`product_name` from `user` u natural join orders o  natural join order_details od inner join product p on od.p_id=p.p_id where o.order_status like 'un%';  
+select u.`name` ,p.`product_name`,o.o_id from `user` u natural join orders o  natural join order_details od inner join product p on od.p_id=p.p_id where o.order_status like 'un%';  
 
 
 -- 5 Most recent orders
@@ -253,12 +255,14 @@ select  u.`u_id`,u.`name` from `user` u where u.u_id not in (select distinct u_i
 
 -- Top 5 Most purchased products ;
 
-select * from order_details;
 
-select p.product_name,sum(od.quntity) from product p inner join order_details od on od.p_id=p.p_id group by od.p_id order by  sum(od.quntity) desc limit 5;
+select p.product_name,sum(od.quntity) as 'total quntity'  from product p inner join order_details od on od.p_id=p.p_id group by od.p_id order by  sum(od.quntity) desc limit 5;
   
   
   -- Most expensive orders.
-select p.product_name , sum(od.price) from product p inner join order_details od on od.p_id=p.p_id group by od.p_id order by sum(od.price) desc limit 1;
+select p.product_name , sum(od.price) as 'total price' from product p inner join order_details od on od.p_id=p.p_id group by od.p_id order by sum(od.price) desc limit 1;
 -- ost chepest orders.
-select p.product_name , sum(od.price) from product p inner join order_details od on od.p_id=p.p_id group by od.p_id order by sum(od.price) asc limit 1;
+select p.product_name , sum(od.price)as 'total price' from product p inner join order_details od on od.p_id=p.p_id group by od.p_id order by sum(od.price) asc limit 1;
+
+
+
