@@ -247,6 +247,8 @@ select u.`u_id`,u.`name`,concat('Order ' ,count(u.u_id),' Times') from `user` u 
 
 -- - Inactive users (Users who hasn’t done any order)
 
+
+
 select  u.`u_id`,u.`name` from `user` u where u.u_id not in (select distinct u_id from orders)  ;
 
 -- Top 5 Most purchased products ;
