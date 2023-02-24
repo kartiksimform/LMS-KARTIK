@@ -40,14 +40,14 @@
 - 4. Inactive users (Users who hasn’t done any order) <br>
  ![Screenshot from 2023-02-24 08-51-58](https://user-images.githubusercontent.com/122249151/221084152-55d90f5b-8861-450c-bd6a-a78aee9cdb6b.png)
 
-- 5. Top 5 Most purchased products
+- 5. Top 5 Most purchased products <br>
 ![Screenshot from 2023-02-24 08-53-40](https://user-images.githubusercontent.com/122249151/221084388-dfafdc8b-0b15-4489-8bf0-9f03279167e1.png)
 
-- 6. Most expensive 
+- 6. Most expensive <br>
 ![Screenshot from 2023-02-24 08-54-07](https://user-images.githubusercontent.com/122249151/221084425-11b807cc-a100-42c1-94d4-59916d476d1b.png)
 
 
-- 7. most chepest orders
+- 7. most chepest orders <br>
 ![Screenshot from 2023-02-24 08-54-24](https://user-images.githubusercontent.com/122249151/221084470-0ec0eece-4b62-4d65-97f5-f9b04305b65f.png)
 
  
