@@ -190,6 +190,10 @@ call userorder(3,12,2);
 call userorder(2,13,5);
 call userorder(3,10,2);
 
+call userorder(1,9,3);
+call userorder(1,10,4);
+
+
 call changestatus(18);
 call changestatus(21);
 call changestatus(22);
@@ -244,7 +248,7 @@ select u.`name` ,p.product_name, o.order_date  from `user` u natural join orders
 
 -- - Top 5 active users (Users having most number of orders)
 
-select u.`u_id`,u.`name`,concat('Order ' ,count(u.u_id),' Times') from `user` u natural join orders o natural join order_details od inner join product p on od.p_id=p.p_id group by (u.u_id) order by count(u.u_id) desc  limit 5 ;
+select u.`u_id`,u.`name`,concat('Order ' ,count(o.u_id),' Times') from `user` u natural join orders o natural join order_details od inner join product p on od.p_id=p.p_id group by (u.u_id) order by count(u.u_id) desc  limit 5 ;
 
 
 -- - Inactive users (Users who hasn’t done any order)
