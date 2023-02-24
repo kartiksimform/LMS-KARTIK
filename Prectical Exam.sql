@@ -232,7 +232,12 @@ select * from order_details;
 
 
 
-select u.`name` , p.`product_name`, o.`order_date`,CONCAT( DATEDIFF(o.`delivery_date`, NOW()) , ' Days') as 'Day left', o.`o_id` from  `user`  u   inner join `orders` o on u.u_id=o.u_id inner join order_details od on od.o_id=o.o_id inner join `product` p on p.p_id=od.p_id;
+select u.`name` , p.`product_name`, o.`order_date`,
+case when (DATEDIFF(o.`delivery_date`, NOW())>0) then CONCAT( DATEDIFF(o.`delivery_date`, NOW()) , ' Days Left')
+else CONCAT(abs( DATEDIFF(o.`delivery_date`, NOW())) , ' Days Ago')
+end
+as 'Day', o.`o_id` from  `user`  u   inner join `orders` o on u.u_id=o.u_id inner join order_details od on od.o_id=o.o_id inner join `product` p on p.p_id=od.p_id;
+
 
 
 -- 2. Create summary report which provide information about
@@ -264,8 +269,20 @@ select p.product_name,sum(od.quntity) as 'total quntity'  from product p inner j
   
   
   -- Most expensive orders.
+  select o.o_id,(od.price),p.product_name from orders o natural join order_details od inner join product p on p.p_id=od.p_id order by od.price desc limit 1;
+  
+  select max(price),o_id from order_details group by o_id ;
+  
+  -- most often product
 select p.product_name , sum(od.price) as 'total price' from product p inner join order_details od on od.p_id=p.p_id group by od.p_id order by sum(od.price) desc limit 1;
--- ost chepest orders.
+
+
+
+-- most chepest orders.
+
+  select o.o_id,(od.price),p.product_name from orders o natural join order_details od inner join product p on p.p_id=od.p_id order by od.price as limit 1;
+  
+-- most unoften product
 select p.product_name , sum(od.price)as 'total price' from product p inner join order_details od on od.p_id=p.p_id group by od.p_id order by sum(od.price) asc limit 1;
 
 
