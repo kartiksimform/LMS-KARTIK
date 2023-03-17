@@ -8,11 +8,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <!-- <li class="nav-item">
-          <a class="nav-link " aria-current="page" href="#">Home</a>
-        </li> -->
 
-       
         <li class="nav-item">
           <a class="nav-link <?php if(isset($_REQUEST['name'])){if($_REQUEST['name']=='ltd'){echo "active";}} ?>" href="index.php?name=ltd">Lenght To Distance</a>
         </li>
