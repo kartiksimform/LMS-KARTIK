@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crud Opration</title>
+
+  <!-- Use bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+
+
+
+  <script src="js/ajazjquery.js"></script>
+
+
+
+  <script src="js/dataset.js"></script>
+  <script src="js/datasetbootsharp.js"></script>
+  <link rel="stylesheet" href="css/datasetcss.css">
+  <link rel="stylesheet" href="css/style.css">
+
+
+</head>
+
+<body>
+  <div class="main">
+
+    <header>
+      <h1>Local Storage Crud Oprations</h1>
+      <nav class="header-nav">
+
+      </nav>
+    </header>
+
+    <section class="hero">
+
+      <div class="form">
+        <form>
+
+          <input type="text" id="storeid" class="dnone">
+          <div id="warning">
+
+            <img src="" id="shows" alt="">
+          </div>
+          <div class="form-group">
+            <label for="productId">Product Id</label>
+            <input type="text" id="productId" required>
+          </div>
+          <div class="form-group">
+            <label for="productName">Product Name</label>
+            <input type="text" id="productName" required>
+          </div>
+          <div class="form-group">
+            <label for="image">Image</label>
+            <input type="file" id="image" accept="image/*" required>
+          </div>
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" id="price" min="0" step="0.01" required>
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" rows="5" required></textarea>
+          </div>
+          <div class="flex">
+
+            <button type="" class="dnone" id="update">Update</button>
+            <button type="" class="dnone" onclick="submitone('oldtonew')" id="addnew">Add New</button>
+            <button type="" onclick="submitone('new')" id="submit">Submit</button>
+          </div>
+        </form>
+
+      </div>
+    </section>
+    <section class="showdetais">
+      <table class="table" id="maintable">
+        <thead class="table-head">
+          <tr>
+            <th class="table-head-item">Product Id</th>
+            <th class="table-head-item">Product Name</th>
+            <th class="table-head-item">Image</th>
+            <th class="table-head-item">Price</th>
+            <th class="table-head-item">Description</th>
+            <th class="table-head-item">Action</th>
+          </tr>
+
+        </thead>
+        <tbody class="table-body" id="tablebody">
+
+        </tbody>
+      </table>
+
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+    <section class="footer">
+      <footer>
+        <p>Kartik Copyright &copy; 2023</p>
+      </footer>
+
+    </section>
+  </div>
+  <script src="js/script.js"></script>
+  <script src="https://kit.fontawesome.com/96e97f4edb.js" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
